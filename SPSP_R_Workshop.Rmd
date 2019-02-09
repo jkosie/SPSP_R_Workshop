@@ -58,7 +58,7 @@ x = 8
 x
 
 # What about y?
-#y
+y
 
 # Need to assign something to y!
 y <- 2
@@ -589,9 +589,9 @@ ggplot(data = ma_data, mapping = aes(x = ravens, y = woodcockTotal)) +
 > **Exercise 8.** Plot the relationship between `pvAvg` and `arithmeticTotal`. As above, create lines overlaid on a scatter plot. For the points, use different colors for each level of `group` (i.e., whether they were in the mental abacus versus control group). For the lines, use both different colors and line types for `pluribus`.
 
 ```{r}
-ggplot(data = ma_data, mapping = aes(x = pvAvg, y = arithmeticTotal)) +
-  geom_point(mapping = aes(color = group)) +
-  geom_smooth(mapping = aes(color = group, linetype = group)) 
+
+
+
 
 ```
 Now let's try a bar plot. We can combine what we've done above with plotting in ggplot to examine the avearge `ravens` for each level of `group` (intervention vs. control).
@@ -619,14 +619,9 @@ ggplot(plot.data, aes(x=factor(year), y=mean, fill = factor(year))) +
 Hint: See `facet_wrap` above.
 
 ```{r}
-plot.data <- ma_data %>% 
-  group_by(year, group) %>% 
-  summarise(mean_ravens = mean(ravens), 
-            sd = sd(ravens))
 
-ggplot(plot.data, aes(x = as.factor(year), y = mean_ravens, fill = group)) +
-  geom_bar(stat = "identity") +
-  facet_wrap(~ group)
+
+
 
 ```
 
