@@ -184,7 +184,7 @@ ma_data <- read.csv("mental_abacus_data.csv", header = TRUE)
 
 ## Examining the data file
 
-This dataset (described [here](https://github.com/mcfrank/openscience_tutorial/tree/master/datasets) come from [Barner et al. (2017), JNC](https://jnc.psychopen.eu/article/view/106), a classroom-randomized controlled trial of an elementary math intervention. The design was a simple pre-post assessment at the beginning and end of the school year. The primary question was whether assignment to group (control vs. mental abacus) produced differences in any of the outcomes (ravens:woodcockTotal). A secondary question was about the role of grade level and baseline math knowledge in the success of the intervention.
+This dataset (described [here](https://github.com/mcfrank/openscience_tutorial/tree/master/datasets) comes from [Barner et al. (2017), JNC](https://jnc.psychopen.eu/article/view/106), a classroom-randomized controlled trial of an elementary math intervention. The design was a simple pre-post assessment at the beginning and end of the school year. The primary question was whether assignment to group (control vs. mental abacus) produced differences in any of the outcomes (ravens:woodcockTotal). A secondary question was about the role of grade level and baseline math knowledge in the success of the intervention.
 
 First, let's take a look at the data we'll be using:
 
@@ -288,8 +288,7 @@ ma_data$ravens %>% mean()
 That's not very useful yet, but when you start **nesting** functions, it gets better. 
 
 ```{r}
-round(mean(ma_data$ravens), 
-      digits = 2)
+round(mean(ma_data$ravens), digits = 2)
 
 ma_data$ravens %>% mean %>% round(digits = 2)
 
@@ -394,21 +393,17 @@ a = 3 #assigning a value of 3 to a (same as a <- 3)
 a == 3 #does a equal 3? YES
 a == 4 #does a equal 4? NO
 
-a = 4 #if I do this
-a == 4 #now a is equal to 4? YES
-a == 3 #is a equal to 3? NO (because we changed the value we assigned to a)
-
-a != 4 #is a NOT equal to 4? NO
-a != 3 #is a NOT equal to 3? YES
+a != 4 #is a NOT equal to 4? YES
+a != 3 #is a NOT equal to 3? NO
 
 # < and > (tip - the PacMan wants to eat whatever is bigger, e.g. 4>3 or 5<10)
 # <= >= less than or equal to and greater than or equal to
 
-a > 3 #yes, a = 4, which is greater than 3
-a < 3 #no, 4 is not less than 3
-a > 4 #no, 4 is not greater than 4
-a >= 4 #but it is greater than or equal to 4! (because a = 4)
-a <= 4 #...and it's less than or equal to 4! (because a = 4)
+a > 2 #yes, a = 3, which is greater than 2
+a < 2 #no, 3 is not less than 2
+a > 3 #no, 3 is not greater than 3 (it's the same)
+a >= 3 #but it is greater than or equal to 3! (because a = 3)
+a <= 3 #...and it's less than or equal to 3! (because a = 3)
 ```
 
 > **Exercise 5.** Create a smaller datast with **only** individuals in first grade in the control (CNTL) group. 
@@ -483,7 +478,7 @@ ravens_means <- ma_data %>%
 ravens_means
 ```
 
-> **Exercise 6.** Let's compare whether the difference in pre- and post-intervention scores (i.e., `year`) on `ravens` differs for children in the control (`CNTL`) versus experimental (`MA`) groups. Use the functions `group` and `summarise` to produce a table of means and standard deviations across each of these four groups (1. CNTL pre-test; 2. CNTL post-test; 3. MA pre-test; MA post-test)
+> **Exercise 6.** Let's compare whether the difference in pre- and post-intervention scores (i.e., `year`) on `ravens` differs for children in the control (`CNTL`) versus experimental (`MA`) groups. Use the functions `group` and `summarise` to produce a table of means and standard deviations across each of these four groups (1. CNTL pre-test (2015); 2. CNTL post-test (2016); 3. MA pre-test (2015); MA post-test (2016))
 
 Hint: it is possible to group by two (or more) variables.
 
