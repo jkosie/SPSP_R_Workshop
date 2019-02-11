@@ -3,7 +3,7 @@ Reproducible Data Analysis and Paper Writing in R Workshop at SPSP 2019
 
 # Acknowledgements
 
-+ Adapted from: [ICIS 2018: Open Science Tutorial](https://github.com/jkosie/openscience_tutorial)
++ Adapted from: [ICIS 2018: Open Science Tutorial](https://github.com/jkosie/openscience_tutorial) and [University of Oregon R Bootcamp](https://github.com/jkosie/uoregon_r_bootcamp)
 
 + Original content created by Jessica E. Kosie and [Michael C. Frank](https://web.stanford.edu/~mcfrank/)
 
