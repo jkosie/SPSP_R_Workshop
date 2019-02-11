@@ -1,5 +1,5 @@
 ---
-title: "SPSP R Workshop"
+title: "SPSP R Workshop with Answers"
 author: "Jessica E. Kosie"
 date: "2/4/2019"
 output:
@@ -96,9 +96,12 @@ seq(from = 0, to = 1, length.out=11)
 > **Exercise 1.** Create a variable called x that is assigned the number 5. Create a variable called y that is a sequence of numbers from 5 to 25, by 5. Multiply x and y. What happens? 
 
 ```{r}
+x <- 5
+y <- seq(from = 5, to = 25, by = 5)
+x*y
 
-
-
+#now make x a vector of numbers and multiply x and y - what happens?
+x <- c(2, 5)
 ```
 
 ## Functions
@@ -127,7 +130,7 @@ mean(q, na.rm = TRUE)
 # Hint:
 ?rnorm
 
-
+x <- rnorm(n = 5, mean = 0, sd = 0.5)
 
 
 ```
@@ -252,8 +255,7 @@ mean(ma_data$ravens, na.rm = FALSE)
 > **Exercise 3.** Let's center the ravens score. Create a new column called ravens_centered in which you center ravens by subtracting the mean of the ravens column from each entry in the ravens column. (Yes, there is a function for centering, but let's do it the long way for now!)
 
 ```{r}
-
-
+ma_data$ravens_centered <- ma_data$ravens - mean(ma_data$ravens)
 
 ```
 
@@ -313,8 +315,9 @@ length(unique(ma_data$class_num))
 Piped version:
 
 ```{r}
-
-
+ma_data$class_num %>% 
+  unique() %>% 
+  length()
 
 
 ```
@@ -413,10 +416,9 @@ a <= 3 #...and it's less than or equal to 3! (because a = 3)
 > **Exercise 5.** Create a smaller datast with **only** individuals in first grade in the control (CNTL) group. 
 
 ```{r}
-
-
-
-
+ma_data_subset <- ma_data %>% 
+  filter(grade == "first grade",
+         group == "CNTL")
 
 ```
 There are also times when you want to add or remove *columns*. You might want to remove columns to simplify the dataset. If you wanted to do that, the verb is `select`. 
@@ -489,9 +491,10 @@ ravens_means
 Hint: it is possible to group by two (or more) variables.
 
 ```{r}
-
-
-
+ma_data %>% 
+  group_by(year, group) %>% 
+  summarise(mean = mean(ravens),
+            sd = sd(ravens))
 
 ```
 ## Graphing in ggplot2
@@ -541,8 +544,8 @@ ggplot(data = ma_data) +
 Do we need to specify that `grade` is a factor?
 
 ```{r}
-
-
+ggplot(data = ma_data) +
+  geom_point(mapping = aes(x = gonogo, y = swm, color = grade, shape = grade))
 
 
 ```
@@ -591,9 +594,9 @@ ggplot(data = ma_data, mapping = aes(x = ravens, y = woodcockTotal)) +
 > **Exercise 8.** Plot the relationship between `pvAvg` and `arithmeticTotal`. As above, create lines overlaid on a scatter plot. For the points, use different colors for each level of `group` (i.e., whether they were in the mental abacus versus control group). For the lines, use both different colors and line types for `group`.
 
 ```{r}
-
-
-
+ggplot(data = ma_data, aes(x = pvAvg, y = arithmeticTotal)) +
+  geom_point(aes(color = group)) +
+  geom_smooth(aes(color = group, linetype = group))
 
 ```
 Now let's try a bar plot. We can combine what we've done above with plotting in ggplot to examine the avearge `ravens` for each level of `group` (intervention vs. control).
@@ -621,9 +624,18 @@ ggplot(plot.data, aes(x=factor(year), y=mean, fill = factor(year))) +
 Hint: See `facet_wrap` above.
 
 ```{r}
+plot.data <- ma_data %>% 
+  group_by(year, group) %>% 
+  summarise(mean = mean(ravens))
 
+ggplot(plot.data, aes(x = factor(year), y = mean, fill= group)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ group)
 
+#Alternative to facet_wrap:
 
+ggplot(plot.data, aes(x = factor(year), y = mean, fill= group)) +
+  geom_bar(stat = "identity", position = position_dodge())
 
 
 ```
